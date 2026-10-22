@@ -1,0 +1,19 @@
+[Unit]
+Description=Memex private knowledge reader
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/workspace/repos/memex-reader
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=TZ=Asia/Kolkata
+EnvironmentFile=%h/.config/memex-reader/server.env
+ExecStart=%h/.local/bin/node server/main.mjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
